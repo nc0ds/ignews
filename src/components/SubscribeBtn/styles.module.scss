@@ -1,0 +1,36 @@
+.containerInHome {
+  width: 100%;
+  max-width: 16.25rem;
+  padding: 1.25rem 2rem;
+  border: none;
+  border-radius: 99999px;
+  background-color: var(--yellow-500);
+  color: var(--gray-900);
+  font-weight: 700;
+  font-size: 1.25rem;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(0.8);
+  }
+}
+
+.containerOutHome {
+  width: 100%;
+  padding: 1.25rem 2rem;
+  border: none;
+  border-radius: 99999px;
+  background-color: var(--gray-600);
+  color: var(--white);
+  font-weight: 500;
+  font-size: 1.25rem;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    filter: brightness(0.8);
+  }
+
+  & > span {
+    color: var(--yellow-500);
+  }
+}

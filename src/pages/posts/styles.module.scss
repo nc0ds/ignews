@@ -1,0 +1,10 @@
+.container {
+  width: 100%;
+  max-width: 900px;
+  margin: 4rem auto;
+
+  & > div {
+    width: 100%;
+    border-bottom: 1px solid var(--gray-600);
+  }
+}

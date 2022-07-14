@@ -1,34 +1,47 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ig.news
+This app was made for study purposes, possible due to [Rocketseat](https://www.rocketseat.com.br/)'s Ignite course.
 
-## Getting Started
+## Technologies used
+- [Next.js](https://nextjs.org/) (React framework)
+- [TypeScript](https://www.typescriptlang.org/)
+- [React-icons](https://react-icons.github.io/react-icons/) (Icons)
+- CSS Modules using SCSS
+- [Stripe](https://stripe.com/) (Payment gateway)
+- [FaunaDB](https://fauna.com/) (Database)
+- [Prismic.io](https://prismic.io/) (Headless CMS)
+- [Axios](https://axios-http.com/) (HTTP Client)
+- [NextAuth.js](https://next-auth.js.org/) (Auth for Next.js)
 
-First, run the development server:
+## User flow
+![ig.news User Flow](./github-images/ignews-user-flow.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Screenshots
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Desktop
+- Home page
+![Home Desktop](./github-images/home-desktop.png)
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Posts page
+![Posts Desktop](./github-images/posts-desktop.png)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- Post Preview
+![Post Preview Desktop](./github-images/post-preview-desktop.png)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Post without restriction
+![Post without restriction desktop](./github-images/post-desktop.png)
 
-## Learn More
+### Mobile
+- Home page
+![Home mobile](./github-images/home-mobile.png)
 
-To learn more about Next.js, take a look at the following resources:
+- Posts page
+![Posts mobile](./github-images/posts-mobile.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Post Preview
+![Post Preview mobile](./github-images/post-preview-mobile.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Post without restriction
+![Post without restriction mobile](./github-images/post-mobile.png)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Special thanks
+Again I want to thank Rocketseat for the amazing course, there was a lot to learn with this project, things that surely I will use in the future, be as a personal or professional project.
