@@ -10,6 +10,7 @@ interface HomePageProps {
 	product: {
 		price_id: string;
 		amount: number;
+		amount_formatted: string;
 	};
 }
 
@@ -27,14 +28,7 @@ const HomePage: NextPage<HomePageProps> = ({ product }) => {
 					</h1>
 					<p>
 						Get access to all the publications <br />
-						<span>
-							for{' '}
-							{Intl.NumberFormat('en-US', {
-								style: 'currency',
-								currency: 'USD',
-							}).format(product.amount)}
-							/month
-						</span>
+						<span>for {product.amount_formatted}/month</span>
 					</p>
 					<SubscribeBtn inHome />
 				</section>
@@ -49,8 +43,14 @@ export const getStaticProps: GetStaticProps = async () => {
 		process.env.STRIPE_SUBSCRIPTION_PRICE_ID as string
 	);
 
+	const amount_formatted = new Intl.NumberFormat('en-US', {
+		style: 'currency',
+		currency: 'USD',
+	}).format((price.unit_amount as number) / 100);
+
 	const product = {
 		price_id: price.id,
+		amount_formatted,
 		amount: (price.unit_amount as number) / 100,
 	};
 

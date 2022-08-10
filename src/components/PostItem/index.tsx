@@ -1,4 +1,3 @@
-import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -14,15 +13,9 @@ interface PostItemProps {
 }
 
 export const PostItem: React.FC<PostItemProps> = ({ post }) => {
-	const { data, status } = useSession();
-
 	return (
 		<div>
-			<Link
-				href={`/posts/${!data?.activeSubscription ? 'preview/' : ''}${
-					post.slug
-				}`}
-			>
+			<Link href={`/posts/${post.slug}`}>
 				<a className={styles.cardContainer}>
 					<time dateTime={post.updatedAt}>{post.updatedAt}</time>
 					<strong>{post.title}</strong>
