@@ -11,6 +11,7 @@ This app was made for study purposes, possible due to [Rocketseat](https://www.r
 - [Prismic.io](https://prismic.io/) (Headless CMS)
 - [Axios](https://axios-http.com/) (HTTP Client)
 - [NextAuth.js](https://next-auth.js.org/) (Auth for Next.js)
+- [Jest](https://jestjs.io/) and [Testing Library](https://testing-library.com/) (Unit test)
 
 ## User flow
 ![ig.news User Flow](./github-images/ignews-user-flow.png)
