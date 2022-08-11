@@ -1,6 +1,8 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { useSession, signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { api } from '../../services/api';
+import { getStripeJS } from '../../services/stripe-js';
 
 import { SubscribeBtn } from '.';
 
@@ -12,6 +14,8 @@ jest.mock('next/router', () => {
 		}),
 	};
 });
+jest.mock('../../services/api');
+jest.mock('../../services/stripe-js');
 
 describe('SubscribeBtn component in home page', () => {
 	it('should render correctly', () => {
@@ -73,6 +77,116 @@ describe('SubscribeBtn component in home page', () => {
 		fireEvent.click(subscribeBtn);
 
 		expect(useRouterPushedMocked).toHaveBeenCalledWith('/posts');
+	});
+
+	it('should call "/subscribe" API requisition', () => {
+		const useSessionMocked = jest.mocked(useSession);
+		const useRouterPushedMocked = jest.fn();
+		const useRouterMocked = jest.mocked(useRouter);
+		const apiPostMocked = jest.mocked(api.post);
+
+		useSessionMocked.mockReturnValueOnce({
+			data: {
+				expires: '',
+				user: { email: 'john.doe@gmail.com', name: 'John Doe' },
+				activeSubscription: false,
+			},
+			status: 'authenticated',
+		} as any);
+
+		useRouterMocked.mockReturnValueOnce({
+			push: useRouterPushedMocked,
+		} as any);
+
+		apiPostMocked.mockResolvedValueOnce({
+			data: {
+				sessionId: 'fake-session-id',
+			},
+		});
+
+		render(<SubscribeBtn inHome />);
+
+		const subscribeBtn = screen.getByText('Subscribe now');
+
+		fireEvent.click(subscribeBtn);
+
+		expect(apiPostMocked).toHaveBeenCalledTimes(1);
+	});
+
+	it('should call "getStripeJS" correctly', () => {
+		const useSessionMocked = jest.mocked(useSession);
+		const useRouterPushedMocked = jest.fn();
+		const useRouterMocked = jest.mocked(useRouter);
+		const apiPostMocked = jest.mocked(api.post);
+		const stripeMocked = jest.mocked(getStripeJS);
+
+		useSessionMocked.mockReturnValueOnce({
+			data: {
+				expires: '',
+				user: { email: 'john.doe@gmail.com', name: 'John Doe' },
+				activeSubscription: false,
+			},
+			status: 'authenticated',
+		} as any);
+
+		useRouterMocked.mockReturnValueOnce({
+			push: useRouterPushedMocked,
+		} as any);
+
+		apiPostMocked.mockResolvedValueOnce({
+			data: {
+				sessionId: 'fake-session-id',
+			},
+		});
+
+		render(<SubscribeBtn inHome />);
+
+		const subscribeBtn = screen.getByText('Subscribe now');
+
+		fireEvent.click(subscribeBtn);
+
+		expect(stripeMocked).toHaveBeenCalledTimes(1);
+	});
+
+	it('should redirect to checkout correctly', () => {
+		const useSessionMocked = jest.mocked(useSession);
+		const useRouterPushedMocked = jest.fn();
+		const useRouterMocked = jest.mocked(useRouter);
+		const apiPostMocked = jest.mocked(api.post);
+		const stripeMocked = jest.mocked(getStripeJS);
+
+		useSessionMocked.mockReturnValueOnce({
+			data: {
+				expires: '',
+				user: { email: 'john.doe@gmail.com', name: 'John Doe' },
+				activeSubscription: false,
+			},
+			status: 'authenticated',
+		} as any);
+
+		useRouterMocked.mockReturnValueOnce({
+			push: useRouterPushedMocked,
+		} as any);
+
+		apiPostMocked.mockResolvedValueOnce({
+			data: {
+				sessionId: 'fake-session-id',
+			},
+		});
+
+		const redirectToCheckoutMocked = jest.fn();
+
+		stripeMocked.mockResolvedValueOnce({
+			redirectToCheckout: redirectToCheckoutMocked,
+		} as any);
+
+		render(<SubscribeBtn inHome />);
+
+		const subscribeBtn = screen.getByText('Subscribe now');
+
+		fireEvent.click(subscribeBtn);
+
+		waitFor(() => expect(redirectToCheckoutMocked).toHaveBeenCalledTimes(1));
 	});
 });
 

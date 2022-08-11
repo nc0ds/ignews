@@ -1,5 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import PostPreview, { getStaticProps } from '../../pages/posts/preview/[slug]';
+import PostPreview, {
+	getStaticProps,
+	getStaticPaths,
+} from '../../pages/posts/preview/[slug]';
 import { useSession } from 'next-auth/react';
 import { prismicClient } from '../../services/prismic';
 import { useRouter } from 'next/router';
@@ -109,6 +112,17 @@ describe('Post Preview slug component', () => {
 				props: {
 					post,
 				},
+			})
+		);
+	});
+
+	it('should return the correct static paths on getStaticPaths', async () => {
+		const getStaticPathsResponse = await getStaticPaths({});
+
+		expect(getStaticPathsResponse).toEqual(
+			expect.objectContaining({
+				paths: [],
+				fallback: 'blocking',
 			})
 		);
 	});
